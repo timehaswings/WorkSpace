@@ -1,0 +1,41 @@
+Warning: This version of UI Automator is deprecated. New tests should be written using
+UI Automator 2.0 which is available as part of the Android Testing Support Library.
+See https://developer.android.com/training/testing/ui-testing/uiautomator-testing.html
+for more details.
+INSTRUMENTATION_STATUS: numtests=2
+INSTRUMENTATION_STATUS: stream=
+com.wings.auto.MyAuto:
+INSTRUMENTATION_STATUS: id=UiAutomatorTestRunner
+INSTRUMENTATION_STATUS: test=test01
+INSTRUMENTATION_STATUS: class=com.wings.auto.MyAuto
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: numtests=2
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: id=UiAutomatorTestRunner
+INSTRUMENTATION_STATUS: test=test01
+INSTRUMENTATION_STATUS: class=com.wings.auto.MyAuto
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: numtests=2
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: id=UiAutomatorTestRunner
+INSTRUMENTATION_STATUS: test=test02
+INSTRUMENTATION_STATUS: class=com.wings.auto.MyAuto
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: numtests=2
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: id=UiAutomatorTestRunner
+INSTRUMENTATION_STATUS: test=test02
+INSTRUMENTATION_STATUS: class=com.wings.auto.MyAuto
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=
+Test results for WatcherResultPrinter=..
+Time: 81.358
+
+OK (2 tests)
+
+
+INSTRUMENTATION_STATUS_CODE: -1

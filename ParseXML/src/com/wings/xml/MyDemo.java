@@ -1,17 +1,21 @@
 package com.wings.xml;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.TimerTask;
+
+import javax.mail.MessagingException;
 
 public class MyDemo {
 	
 	public static void main(String[] args){
 		
 		MyDemo demo=new MyDemo();
-		demo.test0();
+//		demo.test0();
 //		demo.test2();
 //		demo.test3();
+		demo.testEmail();
 	}
 	
 	public void test0(){
@@ -54,6 +58,17 @@ public class MyDemo {
 				}
 			});
 		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void testEmail(){
+		MyEmail email=new MyEmail();
+		try {
+			email.sendEmail();
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

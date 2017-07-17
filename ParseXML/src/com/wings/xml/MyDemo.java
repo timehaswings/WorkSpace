@@ -1,11 +1,9 @@
 package com.wings.xml;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.TimerTask;
 
-import javax.mail.MessagingException;
 
 public class MyDemo {
 	
@@ -66,10 +64,10 @@ public class MyDemo {
 		MyEmail email=new MyEmail();
 		try {
 			email.sendEmail();
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	
 }

@@ -3,7 +3,6 @@ package com.wings.xml;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Properties;
 
@@ -157,7 +156,7 @@ public class MyEmail {
         
         //12.发送邮件, 发到所有的收件地址, message.getAllRecipients() 获取到的是在创建邮件对象时添加的所有收件人, 抄送人, 密送人
         Message message2=createMimeMessage(session,myEmailAccount,"984790751@qq.com");
-        transport.sendMessage(message, message.getAllRecipients());
+        transport.sendMessage(message2, message2.getAllRecipients());
 
         // 7. 关闭连接
         transport.close();

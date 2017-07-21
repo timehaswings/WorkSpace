@@ -45,7 +45,8 @@ public final class AutoRunTest {
 	
 	public  void createAnt(){
 		 System.out.println("create ant");
-		 executeCommamd("cmd /c ant build");
+		 executeCommamd("cmd /c ant clean -p");
+		 executeCommamd("cmd /c ant build -p");
 		 System.out.println("create ant compelete!\t\n");
 	 }
 	 

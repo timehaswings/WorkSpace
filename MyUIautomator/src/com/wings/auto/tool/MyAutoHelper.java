@@ -528,8 +528,12 @@ public class MyAutoHelper {
 	 * @param time 停顿时间毫秒数
 	 * @throws InterruptedException
 	 */
-	public void sleep(int time) throws InterruptedException{
-		Thread.sleep(time);
+	public void sleep(int time){
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -569,7 +573,7 @@ public class MyAutoHelper {
 	 * 唤醒
 	 * @throws RemoteException
 	 */
-	public void wakJeUp() throws RemoteException{
+	public void wakeUp() throws RemoteException{
 		mUiDevice.wakeUp();
 	}
 	

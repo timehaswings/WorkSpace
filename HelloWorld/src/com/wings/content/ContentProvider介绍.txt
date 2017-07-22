@@ -1,0 +1,211 @@
+一、ContentProvider的概念
+　　ContentProvider：为存储和获取数据提供统一的接口。可以在不同的应用程序之间共享数据。Android已经为常见的一些数据提供了默认的ContentProvider
+　　1、ContentProvider使用表的形式来组织数据
+　　 无论数据的来源是什么，ContentProvider都会认为是一种表，然后把数据组织成表格
+　　2、ContentProvider提供的方法
+　　 query：查询
+　　 insert：插入
+　　 update：更新
+　　 delete：删除
+　　 getType：得到数据类型
+　　 onCreate：创建数据时调用的回调函数
+　　3、每个ContentProvider都有一个公共的URI，这个URI用于表示这个ContentProvider所提供的数据。Android所提供的ContentProvider都存放在android.provider包当中
+　　二、ContentProvider的内部原理
+　　自定义一个ContentProvider，来实现内部原理
+　　步骤：
+　　1、定义一个CONTENT_URI常量(里面的字符串必须是唯一)
+　　Public static final Uri CONTENT_URI = Uri.parse("content://com.WangWeiDa.MyContentprovider");
+　　如果有子表，URI为：
+　　Public static final Uri CONTENT_URI = Uri.parse("content://com.WangWeiDa.MyContentProvider/users");
+　　2、定义一个类，继承ContentProvider
+　　Public class MyContentProvider extends ContentProvider
+　　3、实现ContentProvider的所有方法(query、insert、update、delete、getType、onCreate)
+　　package com.WangWeiDa.cp;
+　　
+　　import java.util.HashMap;
+　　
+　　import com.WangWeiDa.cp.MyContentProviderMetaData.UserTableMetaData;
+　　import com.WangWeiDa.data.DatabaseHelp;
+　　
+　　import android.content.ContentProvider;
+　　import android.content.ContentUris;
+　　import android.content.ContentValues;
+　　import android.content.UriMatcher;
+　　import android.database.Cursor;
+　　import android.database.sqlite.SQLiteDatabase;
+　　import android.database.sqlite.SQLiteQueryBuilder;
+　　import android.net.Uri;
+　　import android.text.TextUtils;
+　　
+　　public class MyContentProvider extends ContentProvider {
+　　 //访问表的所有列
+　　 public static final int INCOMING_USER_COLLECTION = 1;
+　　 //访问单独的列
+　　 public static final int INCOMING_USER_SINGLE = 2;
+　　 //操作URI的类
+　　 public static final UriMatcher uriMatcher;
+　　 //为UriMatcher添加自定义的URI
+　　 static{
+　　 uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+　　 uriMatcher.addURI(MyContentProviderMetaData.AUTHORITIES,"/user",
+　　 INCOMING_USER_COLLECTION);
+　　 uriMatcher.addURI(MyContentProviderMetaData.AUTHORITIES,"/user/#",
+　　 INCOMING_USER_SINGLE);
+　　
+　　 }
+　　 private DatabaseHelp dh;
+　　 //为数据库表字段起别名
+　　 public static HashMap userProjectionMap;
+　　 static
+　　 {
+　　 userProjectionMap = new HashMap();
+　　 userProjectionMap.put(UserTableMetaData._ID,UserTableMetaData._ID);
+　　 userProjectionMap.put(UserTableMetaData.USER_NAME, UserTableMetaData.USER_NAME);
+　　 }
+　　 /**
+　　 * 删除表数据
+　　 */
+　　 @Override
+　　 public int delete(Uri uri, String selection, String[] selectionArgs) {
+　　 System.out.println("delete");
+　　 //得到一个可写的数据库
+　　 SQLiteDatabase db = dh.getWritableDatabase();
+　　 //执行删除，得到删除的行数
+　　 int count = db.delete(UserTableMetaData.TABLE_NAME, selection, selectionArgs);
+　　 return count;
+　　 }
+　　 /**
+　　 * 数据库访问类型
+　　 */
+　　 @Override
+　　 public String getType(Uri uri) {
+　　 System.out.println("getType");
+　　 //根据用户请求，得到数据类型
+　　 switch (uriMatcher.match(uri)) {
+　　 case INCOMING_USER_COLLECTION:
+　　 return MyContentProviderMetaData.UserTableMetaData.CONTENT_TYPE;
+　　 case INCOMING_USER_SINGLE:
+　　 return MyContentProviderMetaData.UserTableMetaData.CONTENT_TYPE_ITEM;
+　　 default:
+　　 throw new IllegalArgumentException("UnKnown URI"+uri);
+　　 }
+　　 }
+　　 /**
+　　 * 插入数据
+　　 */
+　　 @Override
+　　 public Uri insert(Uri uri, ContentValues values) {
+　　 //得到一个可写的数据库
+　　 SQLiteDatabase db = dh.getWritableDatabase();
+　　 //向指定的表插入数据，得到返回的Id
+　　 long rowId = db.insert(UserTableMetaData.TABLE_NAME, null, values);
+　　 if(rowId > 0){//判断插入是否执行成功
+　　 //如果添加成功，利用新添加的Id和
+　　 Uri insertedUserUri = ContentUris.withAppendedId(UserTableMetaData.CONTENT_URI, rowId);
+　　 //通知监听器，数据已经改变
+　　 getContext().getContentResolver().notifyChange(insertedUserUri, null);
+　　 return insertedUserUri;
+　　 }
+　　 return uri;
+　　 }
+　　 /**
+　　 * 创建ContentProvider时调用的回调函数
+　　 */
+　　 @Override
+　　 public boolean onCreate() {
+　　 System.out.println("onCreate");
+　　 //得到数据库帮助类
+　　 dh = new DatabaseHelp(getContext(),MyContentProviderMetaData.DATABASE_NAME);
+　　 return false;
+　　 }
+　　 /**
+　　 * 查询数据库
+　　 */
+　　 @Override
+　　 public Cursor query(Uri uri, String[] projection, String selection,
+　　 String[] selectionArgs, String sortOrder) {
+　　 //创建一个执行查询的Sqlite
+　　 SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+　　 //判断用户请求，查询所有还是单个
+　　 switch(uriMatcher.match(uri)){
+　　 case INCOMING_USER_COLLECTION:
+　　 //设置要查询的表名
+　　 qb.setTables(UserTableMetaData.TABLE_NAME);
+　　 //设置表字段的别名
+　　 qb.setProjectionMap(userProjectionMap);
+　　 break;
+　　 case INCOMING_USER_SINGLE:
+　　 qb.setTables(UserTableMetaData.TABLE_NAME);
+　　 qb.setProjectionMap(userProjectionMap);
+　　 //追加条件,getPathSegments()得到用户请求的Uri地址截取的数组，get(1)得到去掉地址中/以后的第二个元素
+　　 qb.appendWhere(UserTableMetaData._ID + "=" + uri.getPathSegments().get(1));
+　　 break;
+　　 }
+　　 //设置排序
+　　 String orderBy;
+　　 if(TextUtils.isEmpty(sortOrder)){
+　　 orderBy = UserTableMetaData.DEFAULT_SORT_ORDER;
+　　 }
+　　 else{
+　　 orderBy = sortOrder;
+　　 }
+　　 //得到一个可读的数据库
+　　 SQLiteDatabase db = dh.getReadableDatabase();
+　　 //执行查询，把输入传入
+　　 Cursor c = qb.query(db, projection, selection, selectionArgs, null, null, orderBy);
+　　 //设置监听
+　　 c.setNotificationUri(getContext().getContentResolver(), uri);
+　　 return c;
+　　
+　　 }
+　　 /**
+　　 * 更新数据库
+　　 */
+　　 @Override
+　　 public int update(Uri uri, ContentValues values, String selection,
+　　 String[] selectionArgs) {
+　　 System.out.println("update");
+　　 //得到一个可写的数据库
+　　 SQLiteDatabase db = dh.getWritableDatabase();
+　　 //执行更新语句，得到更新的条数
+　　 int count = db.update(UserTableMetaData.TABLE_NAME, values, selection, selectionArgs);
+　　 return count;
+　　 }
+　　
+　　}
+　　
+　　4、在AndroidMinifest.xml中进行声明
+　　 android:name=".cp.MyContentProvider"
+　　 android:authorities="com.WangWeiDa.cp.MyContentProvider"
+　　 />
+　　**为ContentProvider提供一个常量类MyContentProviderMetaData.java
+　　package com.WangWeiDa.cp;
+　　
+　　import android.net.Uri;
+　　import android.provider.BaseColumns;
+　　
+　　public class MyContentProviderMetaData {
+　　 //URI的指定，此处的字符串必须和声明的authorities一致
+　　 public static final String AUTHORITIES = "com.wangweida.cp.MyContentProvider";
+　　 //数据库名称
+　　 public static final String DATABASE_NAME = "myContentProvider.db";
+　　 //数据库的版本
+　　 public static final int DATABASE_VERSION = 1;
+　　 //表名 
+　　 public static final String USERS_TABLE_NAME = "user";
+　　 
+　　 public static final class UserTableMetaData implements BaseColumns{
+　　 //表名
+　　 public static final String TABLE_NAME = "user";
+　　 //访问该ContentProvider的URI
+　　 public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITIES + "/user");
+　　 //该ContentProvider所返回的数据类型的定义
+　　 public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.myprovider.user";
+　　 public static final String CONTENT_TYPE_ITEM = "vnd.android.cursor.item/vnd.myprovider.user";
+　　 //列名
+　　 public static final String USER_NAME = "name";
+　　 //默认的排序方法
+　　 public static final String DEFAULT_SORT_ORDER = "_id desc";
+　　 }
+　　
+　　}

@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context="${relativePackage}.${activityClass}" >
+	
+    <!--  
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+     android:id="@+id/hot_pull_refresh_list"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     />
+     -->
+     
+    <com.handmark.pulltorefresh.library.PullToRefreshGridView  
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"  
+        android:id="@+id/hot_pull_refresh_grid"  
+        android:layout_width="match_parent"  
+        android:layout_height="match_parent"  
+        android:cacheColorHint="#000000"
+     	android:divider="#19000000" 
+        android:gravity="center_horizontal"  
+        android:horizontalSpacing="10dp"  
+        android:numColumns="2"  
+        android:stretchMode="columnWidth"  
+        android:verticalSpacing="10dp"  
+        android:dividerHeight="10dp"
+	    android:fadingEdge="none"
+	    android:fastScrollEnabled="false"
+	    android:footerDividersEnabled="false"
+	    android:headerDividersEnabled="false"
+	    android:smoothScrollbar="true"
+        ptr:ptrDrawable="@drawable/ic_launcher"  
+        ptr:ptrMode="both" /> 
+    
+</LinearLayout>

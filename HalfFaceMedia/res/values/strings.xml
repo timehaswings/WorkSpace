@@ -3,5 +3,6 @@
 
     <string name="app_name">HalfFaceMedia</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_media_detals">MediaDetalsActivity</string>
 
 </resources>

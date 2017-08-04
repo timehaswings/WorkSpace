@@ -8,6 +8,7 @@ import com.example.halffacemedia.PagerPhotos;
 import com.example.halffacemedia.PagerVideo;
 import com.example.halffacemedia.PagerVoice;
 
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 
 public abstract class HalfFaceUtil {
@@ -19,5 +20,17 @@ public abstract class HalfFaceUtil {
 		data.add(new PagerNoval());
 		data.add(new PagerVoice());
 		return data;
+	}
+	
+	public static String getRootDir(){
+		return Environment.getExternalStorageDirectory()+"/HalfFace/";
+	}
+	
+	public static String getCachetDir(){
+		return Environment.getExternalStorageDirectory()+"/HalfFace/Cache/";
+	}
+	
+	public static String getDataDir(){
+		return Environment.getExternalStorageDirectory()+"/HalfFace/Data/";
 	}
 }

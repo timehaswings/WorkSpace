@@ -3,6 +3,7 @@ package com.example.halffacemedia;
 
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -37,7 +38,6 @@ public class FragmentHot extends Fragment{
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		
 		listView=(PullToRefreshGridView) view.findViewById(R.id.hot_pull_refresh_grid);
-		
 		listView.setMode(Mode.BOTH);
 		adapter=new RefreshAdapter(getActivity(), getData());
 		listView.setAdapter(adapter);
@@ -53,7 +53,7 @@ public class FragmentHot extends Fragment{
 				new MyAsyncTask(adapter,listView).execute();
 			}
 		});
-		
+		listView.getRefreshableView().setSelector(R.color.transparent);
 	}
 	
 	public List<String> getData(){

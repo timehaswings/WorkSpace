@@ -1,9 +1,135 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:background="#ddd">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp" 
+    android:background="@drawable/linear_bg">
 	
-    <com.example.adapter.LitteMediaPlayer
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="有形的翅膀" 
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+    
+    <FrameLayout 
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</RelativeLayout>
+        android:layout_height="0dp" 
+        android:layout_weight="2.0"
+        android:padding="5dp"
+        android:background="@drawable/relateve_bg">
+        
+        <RelativeLayout
+        android:id="@+id/media_detals_media" 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:visibility="gone">
+        
+        <com.example.adapter.LitteMediaPlayer2
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:id="@+id/media_litte"/>
+    	
+        <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true" >
+            
+            <TextView 
+            android:id="@+id/litte_start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:textColor="#fff"
+            android:text="--:--:--"/>
+            
+            <!--  
+            <ProgressBar
+	        android:id="@+id/media_litte_progress" 
+	        android:layout_width="0dp"
+	        android:layout_height="8dp"
+	        android:layout_weight="1.0"
+	        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
+	        android:progressDrawable="@drawable/progress_bar" 
+	        android:layout_marginLeft="3dp"
+	        android:layout_marginRight="3dp"
+	        />
+	        -->
+	        
+	        <SeekBar 
+	        android:id="@+id/media_litte_progress" 
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1.0"
+	        android:layout_marginLeft="3dp"
+	        android:layout_marginRight="3dp"
+	        android:max="100"
+	        android:progress="0"/>
+            
+            <TextView
+             android:id="@+id/litte_total_time" 
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textColor="#fff"
+             android:text="--:--:--"/>
+            
+            <ImageView
+             android:id="@+id/litte_full_screen"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:src="@drawable/full_screen_btn_selected"
+             android:contentDescription="@string/hello_world"
+             android:layout_marginLeft="6dp"
+             android:layout_marginRight="6dp"
+             />
+            
+        </LinearLayout>
+    	
+         <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:visibility="gone"
+          android:src="@drawable/single_video_play_icon_select"
+          android:contentDescription="@string/hello_world"
+          android:layout_centerInParent="true"
+          />
+        
+    	</RelativeLayout>
+    	
+        
+        <RelativeLayout
+        android:id="@+id/media_detals_button" 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/beige"
+         >
+    	
+             <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/single_video_play_icon_select"
+                 android:contentDescription="@string/hello_world"
+                 android:layout_centerInParent="true"
+                 />
+             
+        </RelativeLayout>
+        
+    </FrameLayout>
+    
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="相关推荐:" 
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+    
+    <ListView 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3.0">
+        
+    </ListView>
+    
+</LinearLayout>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.halffacemedia.MediaDetalsActivity;
 import com.example.halffacemedia.R;
+import com.example.utils.BitmapDecodeUtil;
 import com.example.utils.HalfFaceApp;
 import com.example.utils.HalfFaceUtil;
 import com.example.utils.ImageDeal;
@@ -69,7 +70,7 @@ public class RefreshAdapter extends BaseAdapter implements View.OnClickListener{
         }
         // 找到Item视图里面的文本控件
 		holder.textView.setText(data.get(position));
-//        Bitmap bitmap=MediaDeal.getInstance().getVideoThumb(LitteMediaPlayer.FILE_NAME);
+//        Bitmap bitmap=MediaDeal.getInstance().getVideoThumb(LitteMediaPlayer2.FILE_NAME);
 		Bitmap bitmap=ImageDeal.getInstance().dealBitmap(HalfFaceUtil.getDataDir()+"有形的翅膀.jpg", 500, 500);
 //        Bitmap bitmap=BitmapDecodeUtil.getInstance().decodeBitmap(context, HalfFaceUtil.getDataDir()+"有形的翅膀.jpg");
         holder.imageView.setImageBitmap(bitmap);

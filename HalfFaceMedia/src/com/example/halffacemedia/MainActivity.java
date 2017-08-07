@@ -2,7 +2,7 @@ package com.example.halffacemedia;
 
 import java.io.File;
 
-import com.example.adapter.LitteMediaPlayer;
+import com.example.adapter.LitteMediaPlayer2;
 import com.example.utils.HalfFaceApp;
 import com.example.utils.MediaDeal;
 
@@ -161,7 +161,7 @@ public class MainActivity extends FragmentActivity {
     
     private String saveImage(){
     	MediaDeal deal=MediaDeal.getInstance();
-    	Bitmap bitmap=deal.getVideoThumb(LitteMediaPlayer.FILE_NAME);
+    	Bitmap bitmap=deal.getVideoThumb(LitteMediaPlayer2.FILE_NAME);
     	String path=deal.bitmap2File(bitmap,"有形的翅膀");
     	bitmap.recycle();
     	bitmap=null;

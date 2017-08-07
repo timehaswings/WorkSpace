@@ -34,7 +34,12 @@
         </activity>
         <activity
             android:name=".MediaDetalsActivity"
+            android:hardwareAccelerated="true"
             android:label="@string/title_activity_media_detals" >
+        </activity>
+        <activity
+            android:name=".MediaPlayerActivity"
+            android:label="@string/title_activity_media_player" >
         </activity>
     </application>
 

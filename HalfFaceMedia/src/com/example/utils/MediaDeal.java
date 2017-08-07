@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
@@ -75,11 +76,22 @@ public class MediaDeal {
 	}
 	
 	/**
-	 * 获取时间字符串
+	 * 获取当前时间字符串
 	 * @return
 	 */
 	public String getTimeString(){
 		SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yy_MM_dd_HH_mm_ss",Locale.CHINA);
 		return simpleDateFormat.format(new Date());
 	}
+	
+	/**
+	 * 获取任意时间字符串
+	 * @param millons
+	 * @return
+	 */
+	public String formatTime(int millons){
+		SimpleDateFormat sdf=new SimpleDateFormat("HH:mm:ss",Locale.CHINA);
+		return sdf.format(millons-TimeZone.getDefault().getRawOffset());
+	}
+	
 }

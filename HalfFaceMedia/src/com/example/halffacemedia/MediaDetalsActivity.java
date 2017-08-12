@@ -5,6 +5,7 @@ import com.example.adapter.LitteMediaPlayer2;
 import com.example.utils.MediaDeal;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,6 +25,7 @@ public class MediaDetalsActivity extends Activity {
 	private TextView startTime,totalTime;
 	private Handler mHandler;
 	private ImageView fullScreen;
+	private int ctime;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,12 @@ public class MediaDetalsActivity extends Activity {
 				fullScreen.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						
+						Intent intent=new Intent();
+						intent.setClass(MediaDetalsActivity.this, MediaPlayerActivity.class);
+						intent.putExtra("fileName", "有形的翅膀");
+						intent.putExtra("filePath", LitteMediaPlayer2.FILE_NAME);
+						intent.putExtra("progress", ctime);
+						startActivity(intent);
 					}
 				});
 				mHandler.post(runnable);
@@ -72,9 +79,9 @@ public class MediaDetalsActivity extends Activity {
 				if(totalTime.getText().toString().contains("--")){
 					totalTime.setText(MediaDeal.getInstance().formatTime(mPlayer.getMediaDuration()));
 				}
-				int i=mPlayer.getMediaProgress();
-				startTime.setText(MediaDeal.getInstance().formatTime(i));
-				bar.setProgress((i*100/mPlayer.getMediaDuration()));
+				ctime=mPlayer.getMediaProgress();
+				startTime.setText(MediaDeal.getInstance().formatTime(ctime));
+				bar.setProgress((ctime*100/mPlayer.getMediaDuration()));
 			}
 			mHandler.postDelayed(runnable,1000);
 		}

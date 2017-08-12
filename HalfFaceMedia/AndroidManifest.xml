@@ -35,11 +35,14 @@
         <activity
             android:name=".MediaDetalsActivity"
             android:hardwareAccelerated="true"
-            android:label="@string/title_activity_media_detals" >
+            android:label="@string/title_activity_media_detals" 
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
         </activity>
         <activity
             android:name=".MediaPlayerActivity"
-            android:label="@string/title_activity_media_player" >
+            android:label="@string/title_activity_media_player" 
+            android:screenOrientation="landscape" 
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
         </activity>
     </application>
 

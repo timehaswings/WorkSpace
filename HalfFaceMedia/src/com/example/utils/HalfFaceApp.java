@@ -1,8 +1,8 @@
 package com.example.utils;
 
+
 import android.Manifest;
 import android.app.Application;
-import android.content.Context;
 
 public class HalfFaceApp extends Application{
 	
@@ -11,9 +11,10 @@ public class HalfFaceApp extends Application{
             Manifest.permission.WRITE_EXTERNAL_STORAGE
 	};
 	
-	public static Context getContext(){
-		return getContext();
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		
 	}
-	
 	
 }

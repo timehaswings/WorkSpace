@@ -20,7 +20,7 @@ public class MediaPlayerActivity extends Activity {
 	private TextView text1,start,total;
 	private LinearLayout linear;
 	private SeekBar bar;
-	private Handler handler;
+	private static Handler handler;
 	private int totalTime,currentTime;
 	private int progress;
 	private boolean isSet;

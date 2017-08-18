@@ -5,5 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_media_detals">MediaDetalsActivity</string>
     <string name="title_activity_media_player">MediaPlayerActivity</string>
+    <string name="title_activity_guide">GuideActivity</string>
+    <string name="title_activity_splash">SplashActivity</string>
 
 </resources>

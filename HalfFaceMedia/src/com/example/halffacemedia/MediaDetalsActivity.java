@@ -1,6 +1,7 @@
 package com.example.halffacemedia;
 
 
+
 import com.example.adapter.LitteMediaPlayer2;
 import com.example.utils.MediaDeal;
 
@@ -23,7 +24,7 @@ public class MediaDetalsActivity extends Activity {
 	private LitteMediaPlayer2 mPlayer;
 	private SeekBar bar;
 	private TextView startTime,totalTime;
-	private Handler mHandler;
+	private static Handler mHandler;
 	private ImageView fullScreen;
 	private int ctime;
 
@@ -101,4 +102,5 @@ public class MediaDetalsActivity extends Activity {
 		if(mHandler != null)
 			mHandler.removeCallbacks(runnable);
 	}
+	
 }

@@ -5,13 +5,15 @@
     android:background="#D1EEEE">
 	
     <TextView 
+        android:id="@+id/person_text1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center"
         android:layout_weight="1.0"
         android:text="User Info"/>
     
-    <TextView 
+    <TextView
+        android:id="@+id/person_text2" 
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center"

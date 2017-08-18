@@ -1,16 +1,14 @@
 package com.example.halffacemedia;
 
+
 import java.io.File;
 
-import com.example.adapter.LitteMediaPlayer2;
 import com.example.utils.HalfFaceApp;
-import com.example.utils.MediaDeal;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -40,8 +38,8 @@ public class MainActivity extends FragmentActivity {
 		
 		initView();//初始化视图
 		applyPermissions();//申请应用权限
-		setAppDir();
 //		saveImage();
+		setAppDir();
 		
 		radioGroup.setOnCheckedChangeListener(listener);//控件事件监听
 	}
@@ -142,6 +140,14 @@ public class MainActivity extends FragmentActivity {
     	super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
     
+//    private String saveImage(){
+//    	MediaDeal deal=MediaDeal.getInstance();
+//    	Bitmap bitmap=deal.getVideoThumb(LitteMediaPlayer2.FILE_NAME);
+//    	String path=deal.bitmap2File(bitmap,"有形的翅膀");
+//    	bitmap.recycle();
+//    	bitmap=null;
+//    	return path;
+//    }
     
     /**
      * 设置应用文件夹
@@ -156,15 +162,5 @@ public class MainActivity extends FragmentActivity {
     	File data=new File(file.getAbsoluteFile()+"/Data");
     	if(!data.exists())
     		data.mkdirs();
-    }
-    
-    
-    private String saveImage(){
-    	MediaDeal deal=MediaDeal.getInstance();
-    	Bitmap bitmap=deal.getVideoThumb(LitteMediaPlayer2.FILE_NAME);
-    	String path=deal.bitmap2File(bitmap,"有形的翅膀");
-    	bitmap.recycle();
-    	bitmap=null;
-    	return path;
     }
 }

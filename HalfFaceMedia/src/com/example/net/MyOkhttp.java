@@ -10,7 +10,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.example.utils.HalfFaceUtil;
+import com.example.utils.ImageDeal;
 
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
 import okhttp3.Call;
@@ -95,7 +97,7 @@ public final class MyOkhttp {
 	}
 	
 	/**
-	 * 同步get请求
+	 * 异步get请求
 	 * @param url
 	 * @return
 	 * @throws IOException
@@ -211,6 +213,48 @@ public final class MyOkhttp {
 		});
 	}
 	
+	/**
+	 * 下载媒体文件
+	 * @param url
+	 */
+	public Bitmap downloadImage(String url,final String path){
+		Bitmap bitmap=null;
+		Request request=new Request.Builder().url(url).build();
+		Call call=client.newCall(request);
+		try {
+			Response response=call.execute();
+			InputStream is = null;
+            byte[] buf = new byte[2048];
+            int len = 0;
+            FileOutputStream fos = null;
+            try {
+                is = response.body().byteStream();
+                File file=new File(path);
+                if(!file.exists())
+                	file.createNewFile();
+                fos = new FileOutputStream(file);
+                while ((len = is.read(buf)) != -1) {
+                    fos.write(buf, 0, len);
+                }
+                fos.flush();
+                bitmap=ImageDeal.getInstance().dealBitmap(path, 60, 60);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (is != null) 
+                        is.close();
+                    if (fos != null) 
+                        fos.close();
+                } catch (IOException e) {
+                	e.printStackTrace();
+                }
+            }
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		return bitmap;
+	}
 	
 	/**
 	 * 此处使用此方式是为了避免内存泄漏

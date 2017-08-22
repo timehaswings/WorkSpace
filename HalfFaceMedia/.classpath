@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="libs/okio-1.13.0.jar"/>
 	<classpathentry kind="lib" path="libs/gson-2.2.4-javadoc.jar"/>
 	<classpathentry kind="lib" path="libs/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="libs/disklrucache-2.0.0.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

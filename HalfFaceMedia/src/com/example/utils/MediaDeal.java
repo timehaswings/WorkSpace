@@ -11,7 +11,6 @@ import java.util.TimeZone;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
 import android.media.ThumbnailUtils;
-import android.os.Environment;
 import android.provider.MediaStore;
 
 public class MediaDeal {

@@ -33,4 +33,8 @@ public abstract class HalfFaceUtil {
 	public static String getDataDir(){
 		return Environment.getExternalStorageDirectory()+"/HalfFace/Data/";
 	}
+	
+	public static String URL_MEDIA01="http://172.31.84.73/videp/v001.mp4";
+	
+	public static String URL_IMAGE01="http://172.31.84.73/image/p10.jpg";
 }

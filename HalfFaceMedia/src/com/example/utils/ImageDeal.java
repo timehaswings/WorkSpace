@@ -1,5 +1,7 @@
 package com.example.utils;
 
+import java.io.InputStream;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -39,5 +41,14 @@ public class ImageDeal {
 	        inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
 	    }
 	    return inSampleSize;
+	}
+	
+	public Bitmap dealBitmap(InputStream stream,int reqWidth, int reqHeight){
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inJustDecodeBounds = true;
+		BitmapFactory.decodeStream(stream,null,options);
+		options.inSampleSize = calculateInSampleSize(options, reqWidth,reqHeight);
+	    options.inJustDecodeBounds = false;
+	    return BitmapFactory.decodeStream(stream,null,options);
 	}
 }

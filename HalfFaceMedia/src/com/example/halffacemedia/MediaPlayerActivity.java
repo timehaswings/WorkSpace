@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
-import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -18,7 +17,7 @@ public class MediaPlayerActivity extends Activity {
 	private FrameLayout frame;
 	private LargeMediaPlayer player;
 	private TextView text1,start,total;
-	private LinearLayout linear;
+//	private LinearLayout linear;
 	private SeekBar bar;
 	private static Handler handler;
 	private int totalTime,currentTime;
@@ -37,7 +36,7 @@ public class MediaPlayerActivity extends Activity {
 	private void initView(){
 		frame=(FrameLayout) findViewById(R.id.player_frame);
 		text1=(TextView) findViewById(R.id.palyer_file_name);
-		linear=(LinearLayout) findViewById(R.id.player_linear);
+//		linear=(LinearLayout) findViewById(R.id.player_linear);
 		bar=(SeekBar) findViewById(R.id.player_bar);
 		start=(TextView) findViewById(R.id.player_start);
 		total=(TextView) findViewById(R.id.player_total);

@@ -1,7 +1,10 @@
 package com.example.halffacemedia;
 
 import java.io.File;
+import java.util.List;
 
+import com.example.data.DatabaseManager;
+import com.example.data.FreeInfo;
 import com.example.net.GsonHelper;
 import com.example.net.MyOkhttp;
 import com.example.utils.HalfFaceUtil;
@@ -40,7 +43,12 @@ public class FragmentPerson extends Fragment{
 			@Override
 			public void onCompelet(String content) {
 				GsonHelper helper=new GsonHelper();
-				textView2.setText(helper.paserFile(new File(HalfFaceUtil.getDataDir()+"MediaInfo.json")).get(0).getVactor());
+				List<FreeInfo> infos=helper.paserFile(new File(HalfFaceUtil.getDataDir()+"MediaInfo.json"));
+				DatabaseManager manager=new DatabaseManager(FragmentPerson.this.getActivity());
+				manager.add(infos);
+				textView2.setText(manager.query().get(0).getVactor());
+				manager.close();
+//				textView2.setText(helper.paserFile(new File(HalfFaceUtil.getDataDir()+"MediaInfo.json")).get(0).getVactor());
 			}
 		});
 		

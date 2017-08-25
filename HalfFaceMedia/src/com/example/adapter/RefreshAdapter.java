@@ -4,11 +4,8 @@ import java.util.List;
 
 import com.example.halffacemedia.MediaDetalsActivity;
 import com.example.halffacemedia.R;
-import com.example.utils.BitmapDecodeUtil;
-import com.example.utils.HalfFaceApp;
 import com.example.utils.HalfFaceUtil;
 import com.example.utils.ImageDeal;
-import com.example.utils.MediaDeal;
 
 import android.content.Context;
 import android.content.Intent;

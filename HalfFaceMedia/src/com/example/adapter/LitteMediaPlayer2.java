@@ -1,18 +1,13 @@
 package com.example.adapter;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Canvas;
 import android.graphics.SurfaceTexture;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Environment;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.TextureView;
 
 
@@ -23,12 +18,15 @@ import android.view.TextureView;
 public class LitteMediaPlayer2 extends TextureView implements TextureView.SurfaceTextureListener,View.OnClickListener{
 	
     public static final String FILE_NAME = Environment.getExternalStorageDirectory()+"/Byebye/hello.mp4";
+//    public static final String FILE_NAME = "http://172.31.84.73/res/video/v001.mp4";
 
     private MediaPlayer mMediaPlayer;
     private Surface surface;
+    private Context context;
 
     public LitteMediaPlayer2(Context context) {
         super(context);
+        this.context=context;
         initView();
     }
     
@@ -39,6 +37,7 @@ public class LitteMediaPlayer2 extends TextureView implements TextureView.Surfac
      */
     public LitteMediaPlayer2(Context context,AttributeSet attributeSet){
     	super(context,attributeSet);
+    	this.context=context;
     	initView();
     }
 

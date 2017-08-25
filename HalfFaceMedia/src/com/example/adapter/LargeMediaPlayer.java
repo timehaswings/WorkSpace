@@ -27,7 +27,7 @@ public class LargeMediaPlayer extends TextureView implements TextureView.Surface
     private float startX=0,startY=0;
     private Context context;
     private int light=80;//亮度
-    private int cProgress;//进度
+//    private int cProgress;//进度
 
     public LargeMediaPlayer(Context context,String fileName) {
         super(context);

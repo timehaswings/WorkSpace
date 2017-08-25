@@ -44,8 +44,8 @@ public class MediaDiskCache {
             e.printStackTrace();
         }
         return 0;
-
     }
+    
     /**
     通常都会存放在 /sdcard/Android/data/<application package>/cache 这个路径下面，但同时我们又需要考虑如果这个手机没有SD卡，或者SD正好被移除了的情况，
     */

@@ -228,6 +228,7 @@ public class DataProvider {
 	 */
 	public void writeJson(Context context){
 		this.context=context;
+		handler=new DataHandler();
 		if(context != null)
 			new DownloadTask().execute();
 	}

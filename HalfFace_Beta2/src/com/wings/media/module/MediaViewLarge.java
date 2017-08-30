@@ -16,13 +16,13 @@
 
 package com.wings.media.module;
 
+import com.wings.halfface_beta2.BaseActivity;
 import com.wings.halfface_beta2.R;
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -33,45 +33,59 @@ import io.vov.vitamio.Vitamio;
 import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
 
-public class MediaViewLarge extends Activity implements OnInfoListener, OnBufferingUpdateListener {
+public class MediaViewLarge extends BaseActivity implements OnInfoListener, OnBufferingUpdateListener {
 
   private String path = "http://172.31.84.73/res/video/v001.mp4";
   private VideoView mVideoView;
   private ProgressBar pb;
   private TextView downloadRateView, loadRateView;
+  private RelativeLayout relativeInit,relativePlay;
 
   @Override
   public void onCreate(Bundle icicle) {
     super.onCreate(icicle);
     //初始化vitamio
-	Vitamio.isInitialized(getApplicationContext());
+    Vitamio.isInitialized(getApplicationContext());
     setContentView(R.layout.mediaview_large);
+    
+    //寻找控件
     mVideoView = (VideoView) findViewById(R.id.buffer);
     pb = (ProgressBar) findViewById(R.id.probar);
     downloadRateView = (TextView) findViewById(R.id.download_rate);
     loadRateView = (TextView) findViewById(R.id.load_rate);
+    relativeInit=(RelativeLayout) findViewById(R.id.large_init_view);
+    relativePlay=(RelativeLayout) findViewById(R.id.large_play_view);
+    
+    //显示正在加载
+    relativeInit.setVisibility(View.VISIBLE);
+    relativePlay.setVisibility(View.GONE);
+    
+    //初始化播放器
     initMedia();
   }
   
   //初始化播放器
-  @SuppressLint("NewApi")
-public void initMedia(){
-	mVideoView.setVideoURI(Uri.parse(path));
-	mVideoView.setMediaController(new MediaController(this));
-	mVideoView.requestFocus();
-	mVideoView.setOnInfoListener(this);
-	mVideoView.setOnBufferingUpdateListener(this);
-	mVideoView.setClickable(true);
-	mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-		@Override
-		public void onPrepared(MediaPlayer mediaPlayer) {
-			mediaPlayer.setPlaybackSpeed(1.0f);//设置快进速率
-		}
-	});
-  }
-
+	public void initMedia(){
+		mVideoView.setVideoURI(Uri.parse(path));
+		mVideoView.setMediaController(new MediaController(this));
+		mVideoView.requestFocus();
+		mVideoView.setOnInfoListener(this);
+		mVideoView.setOnBufferingUpdateListener(this);
+		mVideoView.setClickable(true);
+		mVideoView.setBufferSize(512 * 1024);
+		mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+			@Override
+			public void onPrepared(MediaPlayer mediaPlayer) {
+				mediaPlayer.setPlaybackSpeed(1.0f);//设置快进速率
+			}
+		});
+	  }
+  
+  
   @Override
   public boolean onInfo(MediaPlayer mp, int what, int extra) {
+	relativeInit.setVisibility(View.GONE);
+	relativePlay.setVisibility(View.VISIBLE);
     switch (what) {
     case MediaPlayer.MEDIA_INFO_BUFFERING_START://MediaPlayer暂时暂停内部播放，以缓冲更多的数据
 	      if (mVideoView.isPlaying()) {

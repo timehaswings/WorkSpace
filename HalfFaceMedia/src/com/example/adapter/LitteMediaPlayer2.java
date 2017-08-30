@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Environment;
 import android.util.AttributeSet;
 import android.view.Surface;
@@ -17,8 +18,8 @@ import android.view.TextureView;
 @SuppressLint("ClickableViewAccessibility")
 public class LitteMediaPlayer2 extends TextureView implements TextureView.SurfaceTextureListener,View.OnClickListener{
 	
-    public static final String FILE_NAME = Environment.getExternalStorageDirectory()+"/Byebye/hello.mp4";
-//    public static final String FILE_NAME = "http://172.31.84.73/res/video/v001.mp4";
+//    public static final String FILE_NAME = Environment.getExternalStorageDirectory()+"/Byebye/hello.mp4";
+    public static final String FILE_NAME = "http://172.31.84.73/res/video/v001.mp4";
 
     private MediaPlayer mMediaPlayer;
     private Surface surface;
@@ -74,7 +75,9 @@ public class LitteMediaPlayer2 extends TextureView implements TextureView.Surfac
     	surface = new Surface(getSurfaceTexture());
     	mMediaPlayer.setSurface(surface);
     	try {
-            mMediaPlayer.setDataSource(FILE_NAME);
+//            mMediaPlayer.setDataSource(FILE_NAME);
+    		mMediaPlayer
+    		.setDataSource(context, Uri.parse(FILE_NAME));
             mMediaPlayer.prepareAsync();//能否播放视频，此代码是关键
         } catch (Exception e) {
             e.printStackTrace();

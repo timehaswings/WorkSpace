@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" 
+    >
+     <!-- 圆角 android:radius="9dp" -->
+    <corners
+        android:radius="5dp"
+        android:topLeftRadius="5dp"
+        android:topRightRadius="5dp"
+        android:dashGap="5dp"/><!-- 设置圆角半径  android:dashGap="5dp"-->
+    
+	<solid android:color="@color/mistyrose"  />
+	
+	<stroke android:color="@color/honeydew"
+	    android:width="5dp" />
+	
+	<padding android:left="3dp" android:right="3dp" android:bottom="3dp" />
+	
+</shape>

@@ -3,14 +3,100 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/transparent" >
-	
-    <TextView 
-        android:id="@+id/person_text1"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:gravity="center"
-        android:layout_weight="1.0"
-        android:text="个人"/>
+        android:layout_weight="1.0" >
+
+        <TextView
+            android:id="@+id/user_register"
+            android:layout_alignParentEnd="true"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:drawableEnd="@drawable/sns_topic_detail_pressed"
+            android:text="注册" />
+
+        <ImageView
+            android:id="@+id/user_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/user_system_user_photo" />
+
+        <TextView
+            android:id="@+id/user_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_user"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:padding="10dp"
+            android:background="@drawable/bg_three"
+            android:text="登录" />
+    </RelativeLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="2.0">
+        
+        <TextView
+            android:background="@drawable/bg_five" 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           android:padding="10dp"
+            android:layout_marginTop="5dp"
+            android:drawableStart="@drawable/btn_vip_selected"
+            android:drawablePadding="5dp"
+            android:text="开通会员"/>
+        
+        <TextView
+            android:background="@drawable/bg_five" 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="5dp"
+            android:drawableStart="@drawable/btn_feedback_selected"
+            android:drawablePadding="5dp"
+            android:text="我的订单"/>
+        
+        <TextView 
+            android:background="@drawable/bg_five" 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             android:padding="10dp"
+             android:layout_marginTop="5dp"
+             android:drawableStart="@drawable/btn_recommend_selected"
+            android:drawablePadding="5dp"
+            android:text="我的收藏"/>
+        
+        
+        <TextView 
+            android:background="@drawable/bg_five" 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="5dp"
+            android:drawableStart="@drawable/btn_setting_selected"
+            android:drawablePadding="5dp"
+            android:text="我的设置"/>
+        
+        
+    </LinearLayout>
+    
+    <TextView 
+            android:background="@drawable/bg_four" 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:text="退出应用"/>
     
     
 </LinearLayout>

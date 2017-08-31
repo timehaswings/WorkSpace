@@ -257,10 +257,12 @@ public class DataProvider {
 	static class DataHandler extends Handler{
 		@Override
 		public void handleMessage(Message msg) {
-			Bundle bundle=msg.getData();
-			@SuppressWarnings("unchecked")
-			ArrayList<MediaInfo> infos=(ArrayList<MediaInfo>) bundle.getSerializable("media");
-			receive.onCompelete(infos);
+			if(receive != null){
+				Bundle bundle=msg.getData();
+				@SuppressWarnings("unchecked")
+				ArrayList<MediaInfo> infos=(ArrayList<MediaInfo>) bundle.getSerializable("media");
+				receive.onCompelete(infos);
+			}
 		}
 	}
 	

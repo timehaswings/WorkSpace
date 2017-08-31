@@ -18,15 +18,10 @@ package io.vov.vitamio.demo;
 
 import java.io.IOException;
 
-import io.vov.vitamio.MediaPlayer;
-import io.vov.vitamio.MediaPlayer.OnPreparedListener;
-import io.vov.vitamio.MediaPlayer.OnTimedTextListener;
-import io.vov.vitamio.Vitamio;
-
-import android.os.Bundle;
-import android.os.Environment;
 import android.app.Activity;
 import android.graphics.PixelFormat;
+import android.os.Bundle;
+import android.os.Environment;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;

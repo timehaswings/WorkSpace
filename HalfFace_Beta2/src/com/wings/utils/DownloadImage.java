@@ -44,9 +44,12 @@ public class DownloadImage {
 	 * @return
 	 */
 	public static Bitmap downloadMediaBitmap(String url){
-		MediaMetadataRetriever mmr = new MediaMetadataRetriever();  
-		mmr.setDataSource(url, new HashMap<String, String>());
-		Bitmap bitmap = mmr.getFrameAtTime(); 
+		MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+		if(url.startsWith("file://"))
+			mmr.setDataSource(url.substring(7));
+		else
+			mmr.setDataSource(url, new HashMap<String, String>());
+		Bitmap bitmap = mmr.getFrameAtTime();
 		mmr.release();
 		return bitmap;
 	}

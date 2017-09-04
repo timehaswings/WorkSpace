@@ -5,7 +5,6 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -21,6 +20,7 @@ import com.wings.media.utlis.DensityUtil;
 
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.ThumbnailUtils;
+import io.vov.vitamio.Vitamio;
 import io.vov.vitamio.provider.MediaStore;
 import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
@@ -29,9 +29,8 @@ import io.vov.vitamio.widget.VideoView;
  * Created by luojing on 2016/12/9.
  */
 public class VideoActivity extends Activity implements View.OnClickListener {
-    private static final String PATH = "http://bmob-cdn-5540.b0.upaiyun" +
-            ".com/2016/09/09/d0fff44f40ffbc32808db91e4d0e3b4f" +
-            ".mp4";
+//    private static final String PATH = "http://bmob-cdn-5540.b0.upaiyun.com/2016/09/09/d0fff44f40ffbc32808db91e4d0e3b4f.mp4";
+    private static final String PATH = "//sdcard//v001.mp4";
     private VideoView mVideoView;
     private MediaController mController;
     private ImageView mIvThumbnail;
@@ -46,10 +45,10 @@ public class VideoActivity extends Activity implements View.OnClickListener {
     private TextView mTvStory;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (!io.vov.vitamio.LibsChecker.checkVitamioLibs(this))
-//            return;
+        //初始化vitamio
+        Vitamio.isInitialized(getApplicationContext());
         setContentView(R.layout.activity_video);
         init();
         setData();

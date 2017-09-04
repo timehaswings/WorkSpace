@@ -88,7 +88,16 @@ public class SplashActivity extends Activity {
 	                Toast.makeText(this, "拒绝某些权限可能会影响应用正常运行！"+permissions[0], Toast.LENGTH_SHORT).show();
 	            }
 	            break;
+	            
 	        case PermissionUtil.SEND_SMS_CODE: 
+	            if ( grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+	                // 权限被用户同意，可以去放肆了。
+	            } else {
+	                Toast.makeText(this, "拒绝某些权限可能会影响应用正常运行！"+permissions[0], Toast.LENGTH_SHORT).show();
+	            }
+	            break;
+	            
+	        case PermissionUtil.READ_PHONE_CODE: 
 	            if ( grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 	                // 权限被用户同意，可以去放肆了。
 	            } else {

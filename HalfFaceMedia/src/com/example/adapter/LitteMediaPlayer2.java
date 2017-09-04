@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Environment;
 import android.util.AttributeSet;
 import android.view.Surface;
 import android.view.View;

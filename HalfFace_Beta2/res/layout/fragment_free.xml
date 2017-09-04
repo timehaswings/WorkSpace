@@ -4,32 +4,19 @@
     android:orientation="vertical"
     android:background="@color/transparent" >
     
-    <TextView 
-        android:id="@+id/person_text1"
+    <com.yalantis.phoenix.PullToRefreshView
+        android:id="@+id/pull_to_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="免费"/>
-    
-    <io.vov.vitamio.widget.CenterLayout
-        android:layout_width="match_parent"
-        android:layout_height="360dp"
-        android:minHeight="270dp"
-        android:orientation="vertical" >
+        android:layout_height="match_parent">
 
-        <io.vov.vitamio.widget.VideoView
-            android:id="@+id/buffer"
+        <ListView
+            android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true" />
-    </io.vov.vitamio.widget.CenterLayout>
-    
-    <TextView 
-        android:id="@+id/person_text2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="跳转"/>
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:fadingEdge="none"/>
+
+    </com.yalantis.phoenix.PullToRefreshView>
     
 </LinearLayout>

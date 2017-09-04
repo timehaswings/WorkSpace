@@ -3,30 +3,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_four" 
-    android:padding="10dp">
+    android:padding="5dp">
     
     <TextView
         android:id="@+id/refresh_vname" 
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/gray_8f"
         android:text="标题：变形金刚"/>
     
     <TextView 
         android:id="@+id/refresh_vdesc" 
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/gray_8f"
         android:text="描述：奥斯卡电影节2017入围电影Top10"/>
     
     <ImageView
-            android:id="@+id/refresh_video"
+            android:id="@+id/refresh_video_img"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-	        android:minHeight="240dp"
-	        android:maxHeight="360dp"
+            android:layout_height="240dp"
+	        android:minHeight="210dp"
+	        android:maxHeight="270dp"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:src="@raw/timg" 
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/app_name"/>
@@ -41,14 +41,14 @@
         <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/gray_8f"
         android:text="演员信息:"/>
         
         <TextView 
         android:id="@+id/refresh_vactor"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/gray_8f"
         android:text="尼古拉斯.凯奇"/>
         
         <View android:layout_height="0dp"
@@ -74,14 +74,14 @@
             <TextView 
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/gray_8f"
         android:text="更新日期："/>
         
         <TextView
         android:id="@+id/refresh_date" 
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/gray_8f"
         android:text="2017-18-07"/>
             
         </LinearLayout>

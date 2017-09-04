@@ -3,6 +3,7 @@ package com.wings.service;
 
 
 import com.wings.data.storage.DataProvider;
+import com.wings.net.NetUtils;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -29,7 +30,8 @@ public class ReceiveNetData extends Service{
 //					//
 //				}
 //		}).start();
-		DataProvider.getInstance().writeJson(getApplicationContext());
+		if(NetUtils.isNetworkAvailable(this))
+			DataProvider.getInstance().writeJson(getApplicationContext());
 		
 		//长期定时实现逻辑
 		AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);

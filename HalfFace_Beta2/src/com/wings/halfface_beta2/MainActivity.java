@@ -2,13 +2,19 @@ package com.wings.halfface_beta2;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
-public class MainActivity extends BaseActivity{
+public class MainActivity extends BaseActivity {
 	
 	private Fragment fragmentHot,fragmentFree,fragmentMember,fragmentPerson;
 	private ViewPager pager;
@@ -92,4 +98,28 @@ public class MainActivity extends BaseActivity{
 		@Override
 		public void onPageScrollStateChanged(int arg0) {}
 	};
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		//getPermisson();
+	};
+	
+	
+	@SuppressLint("NewApi")
+	public void getPermisson(){
+		 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			 if(checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
+				 requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, 99);
+			 }
+	        }
+	}
+	
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		if (requestCode == 99 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+	        Toast.makeText(this, "已获取读取手机状态权限", Toast.LENGTH_SHORT).show();
+	     }
+
+	}
 }

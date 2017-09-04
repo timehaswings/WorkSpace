@@ -17,13 +17,17 @@ public class ImageLoader {
 	private ImageView view;
 	private String MD5Key;
 	
+	public ImageLoader(){
+		
+	}
+	
 	/**
 	 * 加载Bitmap
 	 * @param context
 	 * @param url
 	 * @return
 	 */
-	public void loadMedia(Context context,String url){
+	public void loadImage(Context context,String url){
 		Log.d("wings", TAG+"开始从缓存中加载图片"+url);
 		this.context=context;
 		this.MD5Key=ImageCacheHelper.getInstance().hashKeyForDisk(url);
@@ -130,6 +134,8 @@ public class ImageLoader {
 		protected void onPostExecute(Bitmap result) {
 			if(result != null){//下载成功，直接显示
 				
+				result=BitmapDecodeUtil.getInstance().decodeBitmap(context, result);
+				
 				//显示
 				if(view != null){
 					view.setImageBitmap(result);
@@ -182,7 +188,7 @@ public class ImageLoader {
 		handler=new MediaHandler();
 		this.context=context;
 		ImageLoader.listener=listener;
-		loadMedia(context, url);
+		loadImage(context, url);
 	}
 	
 	/**

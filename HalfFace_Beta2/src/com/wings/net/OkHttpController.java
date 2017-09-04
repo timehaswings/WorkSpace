@@ -27,6 +27,9 @@ public class OkHttpController {
 	 */
 	public boolean getMediaInfoJson(final Context context){
 		boolean b=false;
+		if(!NetUtils.isNetworkAvailable(context)){
+			return b;
+		}
 		Request request=new Request.Builder().url(NetURL.MEDIA_JSON).build();
 		Call call=client.newCall(request);
 		final GsonHelper helper=new GsonHelper();

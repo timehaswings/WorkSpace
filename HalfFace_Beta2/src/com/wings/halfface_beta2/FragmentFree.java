@@ -95,7 +95,7 @@ public class FragmentFree extends Fragment{
 		 Map<String, Integer> map;
 		 List<Map<String, Integer>>  mSampleList = new ArrayList<Map<String, Integer>>();
          int[] icons = {R.drawable.icon_1,R.drawable.icon_2,R.drawable.icon_3,R.drawable.icon_1,R.drawable.icon_2,R.drawable.icon_3};
-         int[] colors = {R.color.saffron,R.color.eggplant,R.color.sienna,R.color.saffron,R.color.eggplant,R.color.sienna};
+         int[] colors = {R.color.saffron,R.color.eggplant,R.color.sienna,R.color.deepskyblue,R.color.darkslategray,R.color.royalblue};
          for (int i = 0; i < icons.length; i++) {
             map = new HashMap<String, Integer>();
             map.put(KEY_ICON, icons[i]);

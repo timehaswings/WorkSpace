@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.wings.utils.BitmapDecodeUtil;
 import com.yalantis.phoenix.PullToRefreshView;
 
 import android.content.Context;
@@ -112,11 +113,13 @@ public class FragmentFree extends Fragment{
 
         private final LayoutInflater mInflater;
         private final List<Map<String, Integer>> mData;
+        private BitmapDecodeUtil util;
 
         public SampleAdapter(Context context, int layoutResourceId, List<Map<String, Integer>> data) {
             super(context, layoutResourceId, data);
             mData = data;
             mInflater = LayoutInflater.from(context);
+            this.util=BitmapDecodeUtil.getInstance();
         }
 
         @Override
@@ -130,10 +133,10 @@ public class FragmentFree extends Fragment{
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-
             viewHolder.imageViewIcon.setImageResource(mData.get(position).get(KEY_ICON));
             convertView.setBackgroundResource(mData.get(position).get(KEY_COLOR));
-
+//            viewHolder.imageViewIcon.setImageBitmap(util.decodeBitmap(getContext(), mData.get(position).get(KEY_ICON)));
+            
             return convertView;
         }
 

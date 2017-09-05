@@ -19,11 +19,9 @@ package com.wings.media.module;
 import com.wings.halfface_beta2.BaseActivity;
 import com.wings.halfface_beta2.R;
 import com.wings.utils.ImageLoader;
-import com.wings.utils.UriAndFile;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -35,15 +33,13 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import io.vov.vitamio.MediaPlayer;
-import io.vov.vitamio.ThumbnailUtils;
 import io.vov.vitamio.MediaPlayer.OnBufferingUpdateListener;
 import io.vov.vitamio.MediaPlayer.OnInfoListener;
-import io.vov.vitamio.provider.MediaStore;
 import io.vov.vitamio.Vitamio;
 import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
 
-public class MediaViewLarge extends BaseActivity implements OnInfoListener, OnBufferingUpdateListener {
+public class MediaViewLarge extends BaseActivity implements OnInfoListener, OnBufferingUpdateListener{
 
 	// private String path = "http://172.31.84.73/res/video/v001.mp4";
 	private String path = "//sdcard//v001.mp4";
@@ -51,10 +47,11 @@ public class MediaViewLarge extends BaseActivity implements OnInfoListener, OnBu
 	private ProgressBar pb;//下载中
 	private TextView downloadRateView, loadRateView;//下载中显示
 	private RelativeLayout relativeInit,mRLcontent;//初始显示
-	private ImageView mIvThumbnail;
+	private ImageView mIvThumbnail,mPause;
 	private FrameLayout mFlVideoGroup;
 	private LinearLayout mLLcontent;
 	private ViewGroup.LayoutParams mVideoParams,mRLcontentParams;
+	private MediaController mController;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -77,6 +74,7 @@ public class MediaViewLarge extends BaseActivity implements OnInfoListener, OnBu
 		downloadRateView = (TextView) findViewById(R.id.media2_download_rate);
 		loadRateView = (TextView) findViewById(R.id.media2_load_rate);
 		mIvThumbnail = (ImageView) findViewById(R.id.iv_video_thumbnail_l);
+		mPause=(ImageView) findViewById(R.id.iv_video_pause);
 		mFlVideoGroup=(FrameLayout) findViewById(R.id.media2_frame_play);
 		mLLcontent=(LinearLayout) findViewById(R.id.media2_content);
 		mRLcontent=(RelativeLayout) findViewById(R.id.media2_content_play);
@@ -85,7 +83,9 @@ public class MediaViewLarge extends BaseActivity implements OnInfoListener, OnBu
 		relativeInit.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				relativeInit.setVisibility(View.GONE);
+//				relativeInit.setVisibility(View.GONE);
+				mIvThumbnail.setVisibility(View.GONE);
+				mPause.setVisibility(View.GONE);
 				mVideoView.setVisibility(View.VISIBLE);
 				initMedia();
 			}
@@ -102,14 +102,20 @@ public class MediaViewLarge extends BaseActivity implements OnInfoListener, OnBu
 	
 	// 初始化播放器
 	public void initMedia() {
+		
+		//上来先隐藏controller
+		mController=new MediaController(this,true,mFlVideoGroup);
+        mController.setVisibility(View.GONE);
+        
 		mVideoView.setVideoURI(Uri.parse(path));
 //		mVideoView.setMediaController(new MediaController(this));
-		mVideoView.setMediaController(new MediaController(this,true,mFlVideoGroup));
+		mVideoView.setMediaController(mController);
 		mVideoView.requestFocus();
 		mVideoView.setOnInfoListener(this);
 		mVideoView.setOnBufferingUpdateListener(this);
 		mVideoView.setClickable(true);
 		mVideoView.setBufferSize(256 * 1024);
+		
 		mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 			@Override
 			public void onPrepared(MediaPlayer mediaPlayer) {
@@ -183,4 +189,17 @@ public class MediaViewLarge extends BaseActivity implements OnInfoListener, OnBu
 			super.onBackPressed();
 		}
 	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (mVideoView != null) {
+            //清除缓存
+            mVideoView.destroyDrawingCache();
+            //停止播放
+            mVideoView.stopPlayback();
+            mVideoView = null;
+        }
+	}
+
 }

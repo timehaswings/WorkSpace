@@ -1,7 +1,6 @@
 package com.wings.halfface_beta2;
 
 import com.wings.widget.ListViewFragment;
-import com.wings.widget.RecyclerViewFragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

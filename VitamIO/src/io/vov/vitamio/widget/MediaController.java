@@ -78,7 +78,7 @@ import io.vov.vitamio.utils.StringUtils;
  * created in an xml layout.
  */
 public class MediaController extends FrameLayout {
-  private static final int sDefaultTimeout = 3000;
+  private static final int sDefaultTimeout = 5000;//底部controller视图显示时间
   private static final int FADE_OUT = 1;
   private static final int SHOW_PROGRESS = 2;
   private MediaPlayerControl mPlayer;
@@ -104,6 +104,7 @@ public class MediaController extends FrameLayout {
   private ImageView mScreenStyle;
   private Activity mActivity;
 
+  //更新进度条
   @SuppressLint("HandlerLeak")
   private Handler mHandler = new Handler() {
     @Override
@@ -124,12 +125,14 @@ public class MediaController extends FrameLayout {
       }
     }
   };
+  //点击播放器界面
   private View.OnClickListener mPauseListener = new View.OnClickListener() {
     public void onClick(View v) {
       doPauseResume();
       show(sDefaultTimeout);
     }
   };
+  //进度条监听
   private OnSeekBarChangeListener mSeekListener = new OnSeekBarChangeListener() {
     public void onStartTrackingTouch(SeekBar bar) {
       mDragging = true;
@@ -142,7 +145,8 @@ public class MediaController extends FrameLayout {
         mInfoView.setVisibility(View.VISIBLE);
       }
     }
-
+    
+    //拖动进度条监听
     public void onProgressChanged(SeekBar bar, int progress, boolean fromuser) {
       if (!fromuser)
         return;
@@ -184,8 +188,7 @@ public class MediaController extends FrameLayout {
     //初始化Controller布局,通过反射inflate
     mRoot = makeControllerView();
     if(container instanceof FrameLayout){
-      FrameLayout.LayoutParams p = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT,
-              LayoutParams.WRAP_CONTENT);
+      FrameLayout.LayoutParams p = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
       //在父View底部
       p.gravity = Gravity.BOTTOM;
       mRoot.setLayoutParams(p);
@@ -460,7 +463,8 @@ private void initFloatingWindow() {
     return position;
   }
 
-  @Override
+  @SuppressLint("ClickableViewAccessibility")
+@Override
   public boolean onTouchEvent(MotionEvent event) {
     show(sDefaultTimeout);
     return true;
@@ -495,17 +499,18 @@ private void initFloatingWindow() {
     }
     return super.dispatchKeyEvent(event);
   }
-
+  
+  //更新播放器播放状态
   private void updatePausePlay() {
     if (mRoot == null || mPauseButton == null)
       return;
-
     if (mPlayer.isPlaying())
       mPauseButton.setImageResource(getResources().getIdentifier("mediacontroller_pause", "drawable", mContext.getPackageName()));
     else
       mPauseButton.setImageResource(getResources().getIdentifier("mediacontroller_play", "drawable", mContext.getPackageName()));
   }
 
+  //暂停或播放
   private void doPauseResume() {
     if (mPlayer.isPlaying())
       mPlayer.pause();

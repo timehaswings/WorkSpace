@@ -27,7 +27,6 @@
 	        android:maxHeight="270dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@raw/timg" 
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/app_name"/>
     

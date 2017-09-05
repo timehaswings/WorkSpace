@@ -39,6 +39,7 @@
             
             <!-- 暂停时显示 -->
 	        <ImageView
+	            android:id="@+id/iv_video_pause"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:focusable="false"

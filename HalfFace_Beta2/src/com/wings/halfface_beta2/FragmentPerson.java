@@ -2,7 +2,6 @@ package com.wings.halfface_beta2;
 
 import com.wings.widget.CustomDialog;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

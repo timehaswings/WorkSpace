@@ -56,7 +56,8 @@ public final class NetUtils {
         if (context != null) {
             ConnectivityManager mConnectivityManager = (ConnectivityManager) context
                     .getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo mWiFiNetworkInfo = mConnectivityManager
+            @SuppressWarnings("deprecation")
+			NetworkInfo mWiFiNetworkInfo = mConnectivityManager
                     .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
             if (mWiFiNetworkInfo != null) {
                 return mWiFiNetworkInfo.isAvailable();
@@ -75,7 +76,8 @@ public final class NetUtils {
         if (context != null) {
             ConnectivityManager mConnectivityManager = (ConnectivityManager) context
                     .getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo mMobileNetworkInfo = mConnectivityManager
+            @SuppressWarnings("deprecation")
+			NetworkInfo mMobileNetworkInfo = mConnectivityManager
                     .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
             if (mMobileNetworkInfo != null) {
                 return mMobileNetworkInfo.isAvailable();

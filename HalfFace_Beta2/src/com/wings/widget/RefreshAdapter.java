@@ -6,6 +6,7 @@ import com.wings.data.storage.DataProvider;
 import com.wings.data.storage.MediaInfo;
 import com.wings.halfface_beta2.R;
 import com.wings.media.module.MediaViewLarge;
+import com.wings.utils.ImageLoader;
 
 import android.content.Context;
 import android.content.Intent;
@@ -62,20 +63,30 @@ public class RefreshAdapter extends BaseAdapter {
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder holder=new ViewHolder();
 		if(convertView == null){
 			convertView=mInflater.inflate(R.layout.refresh_item, parent, false);
+			holder.videoImage=(ImageView) convertView.findViewById(R.id.refresh_video_img);
+			convertView.setTag(holder);
+		}else{
+			holder=(ViewHolder) convertView.getTag();
 		}
 		TextView vname=(TextView) convertView.findViewById(R.id.refresh_vname);
 		TextView vactor=(TextView) convertView.findViewById(R.id.refresh_vactor);
 		TextView vdesc=(TextView) convertView.findViewById(R.id.refresh_vdesc);
 		TextView vdate=(TextView) convertView.findViewById(R.id.refresh_date);
-		ImageView videoImage=(ImageView) convertView.findViewById(R.id.refresh_video_img);
+//		ImageView videoImage=(ImageView) convertView.findViewById(R.id.refresh_video_img);
 		vname.setText(getItem(position).getVname());
 		vactor.setText(getItem(position).getVactor());
 		vdesc.setText(getItem(position).getVdesc());
 		vdate.setText(getItem(position).getVdate());
-		videoImage.setOnClickListener(new ImageListener(position));
+		setImage(holder.videoImage);
+		holder.videoImage.setOnClickListener(new ImageListener(position));
 		return convertView;
+	}
+	
+	class ViewHolder{
+		ImageView videoImage;
 	}
 
 	//跳转至播放界面
@@ -92,6 +103,10 @@ public class RefreshAdapter extends BaseAdapter {
 		}
 	}
 	
-	
+	//设置图片
+	public void setImage(final ImageView imageView){
+		ImageLoader loader=new ImageLoader();
+		loader.showBitmap(context, imageView, "file://"+"//sdcard//v001.mp4");
+	}
 	
 }
